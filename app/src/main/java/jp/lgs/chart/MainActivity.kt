@@ -5,6 +5,10 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +26,34 @@ class MainActivity : AppCompatActivity() {
         setupLineChart()
         // データの設定
         // lineChart.data = lineData(chartDataCount, 100f)
+    }
+
+    // LineChart用のデータ作成
+    private fun lineData(count: Int, range: Float): LineData {
+
+        val values = mutableListOf<Entry>()
+
+        for (i in 0 until count) {
+            // 値はランダムで表示させる
+            val value = (Math.random() * (range)).toFloat()
+            values.add(Entry(i.toFloat(), value))
+        }
+
+        // グラフのレイアウトの設定
+        val yVals = LineDataSet(values, "テストデータ").apply {
+            axisDependency =  YAxis.AxisDependency.LEFT
+            color = Color.BLACK
+            // タップ時のハイライトカラー
+            highLightColor = Color.YELLOW
+            setDrawCircles(true)
+            setDrawCircleHole(true)
+            // 点の値非表示
+            setDrawValues(false)
+            // 線の太さ
+            lineWidth = 2f
+        }
+        val data = LineData(yVals)
+        return data
     }
 
     private fun setupLineChart(){
@@ -66,5 +98,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }
