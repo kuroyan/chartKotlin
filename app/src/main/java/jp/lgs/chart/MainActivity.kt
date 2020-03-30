@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         // グラフの設定
         setupLineChart()
         // データの設定
-        // lineChart.data = lineData(chartDataCount, 100f)
+        lineChart.data = lineData(chartDataCount, 20f)
     }
 
     // LineChart用のデータ作成
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             // 点の値非表示
             setDrawValues(false)
             // 線の太さ
-            lineWidth = 2f
+            lineWidth = 4f
         }
         val data = LineData(yVals)
         return data
